@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All-in-One Loan Application</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #1746a2;
+  --secondary: #2563eb;
+  --background: #f1f5f9;
+  --text: #172033;
+  --muted: #64748b;
+  --border: #dbe3ef;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+header {
+  background: linear-gradient(135deg, #123579, #2563eb);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+header p {
+  margin: 0;
+  font-size: 14px;
+  opacity: .9;
+}
+
+.container {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 0 14px;
+}
+
+.notice {
+  background: #fff7d6;
+  border: 1px solid #f5d66d;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, .07);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  margin-bottom: 20px;
+}
+
+.step-item {
+  padding: 10px 5px;
+  text-align: center;
+  border-radius: 10px;
+  background: #edf2f8;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.step-item.active {
+  background: #dbeafe;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.step-number {
+  display: block;
+  margin: 0 auto 5px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 50%;
+  background: #d1dbea;
+}
+
+.step-item.active .step-number {
+
+  background: var(--primary);
+  color: white;
+}
+
+.progress-track {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 12.5%;
+  background: linear-gradient(90deg, #1746a2, #38bdf8);
+  transition: width .25s;
+}
+
+h2 {
+  font-size: 22px;
+  margin-top: 0;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #bfdbfe;
+  border-color: var(--secondary);
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+small {
+  color: var(--muted);
+  display: block;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 25px;
+  border-top: 1px solid #edf2f7;
+  padding-top: 20px;
+}
+
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 21px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.btn-back {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.btn-next {
+  background: var(--primary);
+  color: white;
+  margin-left: auto;
+}
+
+.btn-next:hover {
+  background: #0e327a;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  line-height: 1.5;
+  margin: 15px 0;
+  font-size: 13px;
+}
+
+.checkbox-row label {
+  font-weight: normal;
+  margin: 0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.summary-row span:first-child {
+  color: var(--muted);
+}
+
+.summary-row span:last-child {
+  font-weight: bold;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.success {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 22px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.success h2 {
+  color: #047857;
+}
+
+.demo-tag {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+footer {
+  text-align: center;
+  padding: 22px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field.full {
+    grid-column: auto;
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .step-item {
+    font-size: 11px;
+  }
+
+  .buttons button {
+    padding: 12px 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🏦 Loan Application</h1>
+  <p>One form for multiple loan types</p>
+</header>
+
+<main class="container">
+
+  <div class="notice">
+    <strong>Demo project only:</strong>
+    Do not enter real Aadhaar, PAN, bank account numbers, passwords,
+    OTPs or other sensitive information. This demonstration does not
+    submit applications to a bank or store uploaded documents.
+  </div>
+
+  <div class="card">
+
+    <div id="formArea">
+
+      <div class="steps" id="stepNavigation">
+        <div class="step-item active"><span class="step-number">1</span>Personal</div>
+        <div class="step-item"><span class="step-number">2</span>Address</div>
+        <div class="step-item"><span class="step-number">3</span>Identity</div>
+        <div class="step-item"><span class="step-number">4</span>Income</div>
+        <div class="step-item"><span class="step-number">5</span>Loan</div>
+        <div class="step-item"><span class="step-number">6</span>Bank</div>
+        <div class="step-item"><span class="step-number">7</span>Documents</div>
+        <div class="step-item"><span class="step-number">8</span>Review</div>
+      </div>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <form id="loanForm" novalidate>
+
+        <!-- STEP 1 -->
+        <section class="form-step">
+          <span class="demo-tag">STEP 1 OF 8</span>
+          <h2>Personal Details</h2>
+          <p class="description">Enter basic applicant information using fictional demo details.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full Name *</label>
+              <input id="fullName" name="fullName" required maxlength="80" placeholder="Demo Applicant">
+            </div>
+
+            <div class="field">
+              <label for="dob">Date of Birth *</label>
+              <input id="dob" name="dob" type="date" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address *</label>
+              <input id="email" name="email" type="email" required placeholder="demo@example.com">
+            </div>
+
+            <div class="field">
+              <label for="phone">Mobile Number *</label>
+              <input id="phone" name="phone" type="tel" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit demo number">
+            </div>
+
+            <div class="field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender">
+                <option value="">Select option</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="marital">Marital Status</label>
+              <select id="marital" name="marital">
+                <option value="">Select status</option>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="parentName">Father's / Mother's Name</label>
+              <input id="parentName" name="parentName" maxlength="80" placeholder="Demo parent name">
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="form-step hidden">
+          <span class="demo-tag">STEP 2 OF 8</span>
+          <h2>Address Details</h2>
+          <p class="description">Provide fictional address details for the demo.</p>
+
+          <div class="form-grid">
+            <div class="field full">
+              <label for="address">Current Address *</label>
+              <textarea id="address" name="address" required maxlength="250" placeholder="Demo address only"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="city">City / District *</label>
+              <input id="city" name="city" required maxlength="80" placeholder="Demo city">
+            </div>
+
+            <div class="field">
+              <label for="state">State *</label>
+              <select id="state" name="state" required>
+                <option value="">Select state</option>
+                <option>Andhra Pradesh</option>
+                <option>Assam</option>
+                <option>Bihar</option>
+                <option>Delhi</option>
+                <option>Gujarat</option>
+                <option>Haryana</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>Madhya Pradesh</option>
+                <option>Maharashtra</option>
+                <option>Punjab</option>
+                <option>Rajasthan</option>
+                <option>Tamil Nadu</option>
+                <option>Telangana</option>
+                <option>Uttar Pradesh</option>
+                <option>Uttarakhand</option>
+                <option>West Bengal</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="pincode">PIN Code *</label>
+              <input id="pincode" name="pincode" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit demo PIN">
+            </div>
+
+            <div class="field">
+              <label for="residence">Residence Type *</label>
+              <select id="residence" name="residence" required>
+                <option value="">Select type</option>
+                <option>Owned</option>
+                <option>Rented</option>
+                <option>Family Home</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="stayYears">Years at Current Address</label>
+              <input id="stayYears" name="stayYears" type="number" min="0" max="100" placeholder="e.g. 2">
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="form-step hidden">
+          <span class="demo-tag">STEP 3 OF 8</span>
+          <h2>Identity & Address Proof</h2>
+          <p class="description">Select document types. Do not enter real ID numbers or upload real documents.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="idType">Identity Proof Type *</label>
+              <select id="idType" name="idType" required>
+                <option value="">Select document</option>
+                <option>PAN Card</option>
+                <option>Passport</option>
+                <option>Voter ID</option>
+                <option>Driving Licence</option>
+                <option>Other accepted ID</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="addressProof">Address Proof Type *</label>
+              <select id="addressProof" name="addressProof" required>
+                <option value="">Select document</option>
+                <option>Utility Bill</option>
+                <option>Passport</option>
+                <option>Voter ID</option>
+                <option>Driving Licence</option>
+                <option>Other accepted proof</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="idReference">Demo ID Reference (Optional)</label>
+              <input id="idReference" name="idReference" maxlength="30" placeholder="DEMO-ID-1234">
+              <small>Use only fictional placeholder text. Never enter a real Aadhaar or PAN number.</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 4 -->
+        <section class="form-step hidden">
+          <span class="demo-tag">STEP 4 OF 8</span>
+          <h2>Employment & Income</h2>
+          <p class="description">These fields help demonstrate the income section of a loan application.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="employment">Employment Type *</label>
+              <select id="employment" name="employment" required>
+                <option value="">Select type</option>
+                <option>Salaried</option>
+                <option>Self-employed</option>
+                <option>Business Owner</option>
+                <option>Student</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="company">Company / Business Name</label>
+              <input id="company" name="company" maxlength="100" placeholder="Demo company">
+            </div>
+
+            <div class="field">
+              <label for="designation">Designation / Occupation</label>
+              <input id="designation" name="designation" maxlength="80" placeholder="Demo occupation">
+            </div>
+
+            <div class="field">
+              <label for="experience">Work Experience (Years)</label>
+              <input id="experience" name="experience" type="number" min="0" max="80" placeholder="e.g. 2">
+            </div>
+
+            <div class="field">
+              <label for="income">Monthly Income (₹) *</label>
+              <input id="income" name="income" type="number" min="0" max="100000000" required placeholder="e.g. 30000">
+            </div>
+
+            <div class="field">
+              <label for="emi">Existing Monthly EMI (₹)</label>
+              <input id="emi" name="emi" type="number" min="0" max="100000000" placeholder="e.g. 0">
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 5 -->
+        <section class="form-step hidden">
+          <span class="demo-tag">STEP 5 OF 8</span>
+          <h2>Loan Details</h2>
+          <p class="description">Choose the type of loan and enter fictional test values.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="loanType">Loan Type *</label>
+              <select id="loanType" name="loanType" required>
+                <option value="">Choose loan type</option>
+                <option>Personal Loan</option>
+                <option>Home Loan</option>
+                <option>Education Loan</option>
+                <option>Vehicle Loan</option>
+                <option>Business Loan</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="loanAmount">Loan Amount Required (₹) *</label>
+              <input id="loanAmount" name="loanAmount" type="number" min="1" max="1000000000" required placeholder="e.g. 200000">
+            </div>
+
+            <div class="field">
+              <label for="tenure">Loan Tenure *</label>
+              <select id="tenure" name="tenure" required>
+                <option value="">Select tenure</option>
+                <option value="12 months">1 Year (12 months)</option>
+                <option value="24 months">2 Years (24 months)</option>
+                <option value="36 months">3 Years (36 months)</option>
+                <option value="60 months">5 Years (60 months)</option>
+                <option value="120 months">10 Years (120 months)</option>
+                <option value="240 months">20 Years (240 months)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="purpose">Loan Purpose *</label>
+              <select id="purpose" name="purpose" required>
+                <option value="">Select purpose</option>
+                <option>Personal Expenses</option>
+                <option>Home Purchase / Construction</option>
+                <option>Education</option>
+                <option>Vehicle Purchase</option>
+                <option>Business Expansion</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="loanNotes">Additional Information (Optional)</label>
+              <textarea id="loanNotes" name="loanNotes" maxlength="300" placeholder="Optional demo notes"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 6 -->
+        <section class="form-step hidden">
+          <span class="demo-tag">STEP 6 OF 8</span>
+          <h2>Bank Details</h2>
+          <p class="description">For demonstration only. Use fake details, never your actual bank information.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="accountHolder">Account Holder Name *</label>
+              <input id="accountHolder" name="accountHolder" required maxlength="80" placeholder="Demo Account Holder">
+            </div>
+
+            <div class="field">
+              <label for="bankName">Bank Name *</label>
+              <select id="bankName" name="bankName" required>
+                <option value="">Select bank</option>
+                <option>State Bank of India (Demo)</option>
+                <option>HDFC Bank (Demo)</option>
+                <option>ICICI Bank (Demo)</option>
+                <option>Punjab National Bank (Demo)</option>
+                <option>Bank of Baroda (Demo)</option>
+                <option>Other (Demo)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="accountNumber">Demo Account Number *</label>
+              <input id="accountNumber" name="accountNumber" required inputmode="numeric" pattern="[0-9]{9,18}" maxlength="18" placeholder="123456789012">
+            </div>
+
+            <div class="field">
+              <label for="confirmAccount">Confirm Demo Account Number *</label>
+              <input id="confirmAccount" name="confirmAccount" required inputmode="numeric" pattern="[0-9]{9,18}" maxlength="18" placeholder="Repeat demo number">
+            </div>
+
+            <div class="field">
+              <label for="ifsc">Demo IFSC Code *</label>
+              <input id="ifsc" name="ifsc" required maxlength="11" placeholder="SBIN0000000">
+              <small>Use a clearly fictional placeholder. No bank verification is performed.</small>
+            </div>
+
+            <div class="field">
+              <label for="accountType">Account Type *</label>
+              <select id="accountType" name="accountType" required>
+                <option value="">Select type</option>
+                <option>Savings (Demo)</option>
+                <option>Current (Demo)</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 7 -->
+        <section class="form-step hidden">
+          <span class="demo-tag">STEP 7 OF 8</span>
+          <h2>Documents Checklist</h2>
+          <p class="description">Select the document types you would expect to provide in a real application. No files are uploaded in this demo.</p>
+
+          <div class="field full">
+            <label>Document Checklist</label>
+
+            <div class="checkbox-row">
+  <input type="checkbox" id="docIdentity">
+  <label for="docIdentity">Identity Proof Available</label>
+</div>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="docAddress">
+  <label for="docAddress">Address Proof Available</label>
+</div>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="docIncome">
+  <label for="docIncome">Income Proof Available</label>
+</div>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="docBank">
+  <label for="docBank">Bank Statement Available</label>
+</div>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="docPhoto">
+  <label for="docPhoto">Passport Size Photograph Available</label>
+</div>
+
+<div class="checkbox-row">
+  <input type="checkbox" id="demoConfirm" required>
+  <label for="demoConfirm">
+    I confirm that I am using fictional demo information only. *
+  </label>
+</div>
+
+</div>
+
+</section>
+
+<!-- STEP 8: REVIEW -->
+
+<section class="form-step hidden">
+
+  <span class="demo-tag">STEP 8 OF 8</span>
+
+  <h2>📋 Review Your Application</h2>
+
+  <p class="description">
+    Please check your information before completing the demo application.
+  </p>
+
+  <div id="reviewContent"></div>
+
+  <div class="checkbox-row">
+    <input type="checkbox" id="declaration" required>
+
+    <label for="declaration">
+      I understand that this is a frontend demonstration
+      and not a real loan application. *
+    </label>
+  </div>
+
+</section>
+
+<!-- NAVIGATION BUTTONS -->
+
+<div class="buttons">
+
+  <button type="button"
+  class="btn-back"
+  id="backBtn"
+  onclick="changeStep(-1)"
+  disabled>
+    ← Back
+  </button>
+
+  <button type="button"
+  class="btn-next"
+  id="nextBtn"
+  onclick="changeStep(1)">
+    Next →
+  </button>
+
+  <button type="submit"
+  class="btn-next hidden"
+  id="submitBtn">
+    Submit Application ✓
+  </button>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- SUCCESS MESSAGE -->
+
+<div id="successArea" class="success hidden">
+
+  <h2>✅ Application Demo Completed!</h2>
+
+  <p>
+    Thank you for completing the Multi Step Loan Application Form.
+  </p>
+
+  <p id="applicationId"></p>
+
+  <p>
+    This is a frontend-only project.
+    No real loan application has been submitted.
+  </p>
+
+  <button type="button"
+  class="btn-next"
+  onclick="location.reload()"
+  style="margin-top:20px">
+    Start New Application
+  </button>
+
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+// MULTI STEP FORM
+
+let currentStep = 0;
+
+const formSteps = document.querySelectorAll(".form-step");
+
+const stepItems = document.querySelectorAll(".step-item");
+
+const loanForm = document.getElementById("loanForm");
+
+// DISPLAY CURRENT STEP
+
+function showStep() {
+
+  formSteps.forEach((step, index) => {
+
+    step.classList.toggle("hidden", index !== currentStep);
+
+  });
+
+  stepItems.forEach((item, index) => {
+
+    item.classList.toggle("active", index === currentStep);
+
+  });
+
+  document.getElementById("progressFill").style.width =
+    ((currentStep + 1) / formSteps.length * 100) + "%";
+
+  document.getElementById("backBtn").disabled =
+    currentStep === 0;
+
+  document.getElementById("nextBtn").classList.toggle(
+    "hidden",
+    currentStep === formSteps.length - 1
+  );
+
+  document.getElementById("submitBtn").classList.toggle(
+    "hidden",
+    currentStep !== formSteps.length - 1
+  );
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+// VALIDATE CURRENT STEP
+
+function validateStep() {
+
+  const fields = formSteps[currentStep].querySelectorAll(
+    "input, select, textarea"
+  );
+
+  for (const field of fields) {
+
+    if (!field.checkValidity()) {
+
+      field.reportValidity();
+
+      field.focus();
+
+      return false;
+
+    }
+
+  }
+
+  // Confirm matching demo account numbers
+
+  if (currentStep === 5) {
+
+    const account =
+      document.getElementById("accountNumber").value;
+
+    const confirm =
+      document.getElementById("confirmAccount").value;
+
+    if (account !== confirm) {
+
+      alert("Demo account numbers do not match.");
+
+      document.getElementById("confirmAccount").focus();
+
+      return false;
+
+    }
+
+  }
+
+  return true;
+
+}
+
+// NEXT AND BACK BUTTON
+
+function changeStep(direction) {
+
+  if (direction === 1 && !validateStep()) {
+    return;
+  }
+
+  currentStep += direction;
+
+  if (currentStep < 0) {
+    currentStep = 0;
+  }
+
+  if (currentStep >= formSteps.length) {
+    currentStep = formSteps.length - 1;
+  }
+
+  if (currentStep === 7) {
+    generateReview();
+  }
+
+  showStep();
+
+}
+
+// GET FIELD VALUE
+
+function getValue(id) {
+
+  const element = document.getElementById(id);
+
+  return element.value || "Not Provided";
+
+}
+
+// CREATE REVIEW ROW
+
+function createReviewRow(label, value) {
+
+  const row = document.createElement("div");
+
+  row.className = "summary-row";
+
+  const labelSpan = document.createElement("span");
+
+  labelSpan.textContent = label;
+
+  const valueSpan = document.createElement("span");
+
+  valueSpan.textContent = value;
+
+  row.appendChild(labelSpan);
+
+  row.appendChild(valueSpan);
+
+  return row;
+
+}
+
+// GENERATE REVIEW
+
+function generateReview() {
+
+  const review = document.getElementById("reviewContent");
+
+  review.replaceChildren();
+
+  const details = [
+
+    ["Full Name", getValue("fullName")],
+
+    ["Date of Birth", getValue("dob")],
+
+    ["Email", getValue("email")],
+
+    ["Mobile", getValue("phone")],
+
+    ["Gender", getValue("gender")],
+
+    ["Marital Status", getValue("marital")],
+
+    ["Parent Name", getValue("parentName")],
+
+    ["Address", getValue("address")],
+
+    ["City", getValue("city")],
+
+    ["State", getValue("state")],
+
+    ["PIN Code", getValue("pincode")],
+
+    ["Residence Type", getValue("residence")],
+
+    ["Identity Proof", getValue("idType")],
+
+    ["Address Proof", getValue("addressProof")],
+
+    ["Employment", getValue("employment")],
+
+    ["Company", getValue("company")],
+
+    ["Designation", getValue("designation")],
+
+    ["Monthly Income", "₹" + getValue("income")],
+
+    ["Existing EMI", "₹" + getValue("emi")],
+
+    ["Loan Type", getValue("loanType")],
+
+    ["Loan Amount", "₹" + getValue("loanAmount")],
+
+    ["Loan Tenure", getValue("tenure")],
+
+    ["Loan Purpose", getValue("purpose")],
+
+    ["Account Holder", getValue("accountHolder")],
+
+    ["Bank Name", getValue("bankName")],
+
+    ["Account Type", getValue("accountType")]
+
+  ];
+
+  details.forEach(detail => {
+
+    review.appendChild(
+      createReviewRow(detail[0], detail[1])
+    );
+
+  });
+
+}
+
+// DEMO SUBMIT
+
+loanForm.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  if (!validateStep()) {
+    return;
+  }
+
+  const demoId =
+    "DEMO-" + Date.now().toString().slice(-8);
+
+  document.getElementById("formArea").classList.add("hidden");
+
+  document.getElementById("successArea").classList.remove("hidden");
+
+  document.getElementById("applicationId").textContent =
+    "Demo Reference ID: " + demoId;
+
+  window.scrollTo(0, 0);
+
+});
+
+// INITIAL DISPLAY
+
+showStep();
+
+</script>
+  <!-- EMI Calculator -->
+<section id="emi-calculator" style="padding:20px; margin:20px 0; background:#f0f7ff; border-radius:12px; color:#222;">
+  <h2>🏦 EMI Calculator</h2>
+  <p>Calculate your estimated monthly loan EMI.</p>
+
+  <label for="emiAmount">Loan Amount (₹)</label><br>
+  <input type="number" id="emiAmount" min="1" value="100000"><br><br>
+
+  <label for="emiRate">Annual Interest Rate (%)</label><br>
+  <input type="number" id="emiRate" min="0" step="0.1" value="10"><br><br>
+
+  <label for="emiYears">Loan Tenure (Years)</label><br>
+  <input type="number" id="emiYears" min="1" value="2"><br><br>
+
+  <button type="button" onclick="calculateEMI()">Calculate EMI</button>
+
+  <p id="emiResult" aria-live="polite"></p>
+</section>
+
+<script>
+function calculateEMI() {
+  const P = Number(document.getElementById("emiAmount").value);
+  const annualRate = Number(document.getElementById("emiRate").value);
+  const years = Number(document.getElementById("emiYears").value);
+  const result = document.getElementById("emiResult");
+
+  if (!P || P <= 0 || annualRate < 0 || !Number.isFinite(annualRate) ||
+      !years || years <= 0) {
+    result.textContent = "Please enter valid positive values.";
+    return;
+  }
+
+  const n = years * 12;
+  const r = annualRate / 1200;
+
+  const emi = r === 0
+    ? P / n
+    : P * r * Math.pow(1 + r, n) /
+      (Math.pow(1 + r, n) - 1);
+
+  result.textContent = "Estimated Monthly EMI: ₹" +
+    emi.toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+}
+</script>
+  <!-- SIP Calculator -->
+<section id="sip-calculator" style="
+  padding: 20px;
+  margin: 20px 0;
+  background: #f0fff4;
+  border: 1px solid #b7e4c7;
+  border-radius: 12px;
+  color: #222;
+  font-family: Arial, sans-serif;
+">
+  <h2>📈 SIP Calculator</h2>
+
+  <p>
+    Calculate the estimated future value of your monthly investments.
+  </p>
+
+  <label for="sipAmount">Monthly Investment (₹)</label><br>
+  <input
+    type="number"
+    id="sipAmount"
+    min="1"
+    step="1"
+    value="1000"
+    style="width:100%;padding:10px;margin:8px 0;"
+  >
+  <br>
+
+  <label for="sipRate">Expected Annual Return (%)</label><br>
+  <input
+    type="number"
+    id="sipRate"
+    min="0"
+    max="100"
+    step="0.1"
+    value="12"
+    style="width:100%;padding:10px;margin:8px 0;"
+  >
+  <br>
+
+  <label for="sipYears">Investment Duration (Years)</label><br>
+  <input
+    type="number"
+    id="sipYears"
+    min="1"
+    max="100"
+    step="1"
+    value="10"
+    style="width:100%;padding:10px;margin:8px 0;"
+  >
+  <br><br>
+
+  <button
+    type="button"
+    onclick="calculateSIP()"
+    style="
+      padding: 12px 20px;
+      background: #16803c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    "
+  >
+    Calculate SIP
+  </button>
+
+  <div
+    id="sipResult"
+    aria-live="polite"
+    style="
+      margin-top: 20px;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      line-height: 1.8;
+    "
+  >
+    Enter your details and calculate your estimated returns.
+  </div>
+
+  <p style="font-size:13px;color:#555;margin-top:12px;">
+    Note: This is an estimate, not a guaranteed return. Actual market returns
+    may vary. Taxes, fees and inflation are not included.
+  </p>
+</section>
+
+<script>
+function calculateSIP() {
+  const monthlyInvestment = Number(
+    document.getElementById("sipAmount").value
+  );
+
+  const annualRate = Number(
+    document.getElementById("sipRate").value
+  );
+
+  const years = Number(
+    document.getElementById("sipYears").value
+  );
+
+  const result = document.getElementById("sipResult");
+
+  if (
+    !Number.isFinite(monthlyInvestment) ||
+    monthlyInvestment <= 0 ||
+    !Number.isFinite(annualRate) ||
+    annualRate < 0 ||
+    annualRate > 100 ||
+    !Number.isFinite(years) ||
+    years <= 0 ||
+    years > 100
+  ) {
+    result.textContent =
+      "Please enter valid values. Investment must be positive, return must be between 0 and 100%, and duration must be between 1 and 100 years.";
+    return;
+  }
+
+  const months = Math.round(years * 12);
+  const monthlyRate = Math.pow(1 + annualRate / 100, 1 / 12) - 1;
+
+  let futureValue;
+
+  if (monthlyRate === 0) {
+    futureValue = monthlyInvestment * months;
+  } else {
+    futureValue =
+      monthlyInvestment *
+      ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+  }
+
+  const investedAmount = monthlyInvestment * months;
+  const estimatedReturns = futureValue - investedAmount;
+
+  function formatRupees(amount) {
+    return "₹" + amount.toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
+    });
+  }
+
+  result.innerHTML = `
+    <h3>📊 Your SIP Estimate</h3>
+    <p><strong>Total Amount Invested:</strong>
+      ${formatRupees(investedAmount)}</p>
+    <p><strong>Estimated Returns:</strong>
+      ${formatRupees(estimatedReturns)}</p>
+    <p><strong>Estimated Future Value:</strong>
+      ${formatRupees(futureValue)}</p>
+  `;
+}
+</script>
+  
+<!-- Compound Interest Calculator -->
+<section id="compound-calculator" style="
+  padding:20px;
+  margin:20px 0;
+  background:#fff8e7;
+  border:1px solid #f1d48a;
+  border-radius:12px;
+  color:#222;
+  font-family:Arial,sans-serif;
+">
+  <h2>📊 Compound Interest Calculator</h2>
+  <p>Calculate the estimated future value of your investment.</p>
+
+  <label for="compoundPrincipal">Initial Investment (₹)</label><br>
+  <input type="number" id="compoundPrincipal" min="1" value="10000"
+    style="width:100%;padding:10px;margin:8px 0;">
+  <br>
+
+  <label for="compoundRate">Annual Interest Rate (%)</label><br>
+  <input type="number" id="compoundRate" min="0" max="100"
+    step="0.1" value="8"
+    style="width:100%;padding:10px;margin:8px 0;">
+  <br>
+
+  <label for="compoundYears">Investment Duration (Years)</label><br>
+  <input type="number" id="compoundYears" min="1" max="100" value="5"
+    style="width:100%;padding:10px;margin:8px 0;">
+  <br>
+
+  <label for="compoundFrequency">Compounding Frequency</label><br>
+  <select id="compoundFrequency"
+    style="width:100%;padding:10px;margin:8px 0;">
+    <option value="1">Annually</option>
+    <option value="2">Half-yearly</option>
+    <option value="4">Quarterly</option>
+    <option value="12" selected>Monthly</option>
+    <option value="365">Daily (approximation)</option>
+  </select>
+  <br><br>
+
+  <button type="button" onclick="calculateCompoundInterest()"
+    style="padding:12px 20px;background:#a66b00;color:white;
+    border:none;border-radius:8px;cursor:pointer;font-size:16px;">
+    Calculate Interest
+  </button>
+
+  <div id="compoundResult" aria-live="polite"
+    style="margin-top:20px;padding:15px;background:white;
+    border-radius:8px;line-height:1.8;">
+    Enter your details and calculate your estimated returns.
+  </div>
+
+  <p style="font-size:13px;color:#555;margin-top:12px;">
+    This is an estimate. Actual returns may differ. Taxes, fees and inflation
+    are not included.
+  </p>
+</section>
+
+<script>
+function calculateCompoundInterest() {
+  const principal = Number(
+    document.getElementById("compoundPrincipal").value
+  );
+  const annualRate = Number(
+    document.getElementById("compoundRate").value
+  );
+  const years = Number(
+    document.getElementById("compoundYears").value
+  );
+  const frequency = Number(
+    document.getElementById("compoundFrequency").value
+  );
+  const result = document.getElementById("compoundResult");
+
+  if (
+    !Number.isFinite(principal) || principal <= 0 ||
+    !Number.isFinite(annualRate) || annualRate < 0 ||
+    annualRate > 100 ||
+    !Number.isFinite(years) || years <= 0 ||
+    years > 100 ||
+    ![1, 2, 4, 12, 365].includes(frequency)
+  ) {
+    result.textContent = "Please enter valid values.";
+    return;
+  }
+
+  const futureValue =
+    principal * Math.pow(
+      1 + annualRate / (100 * frequency),
+      frequency * years
+    );
+
+  const interestEarned = futureValue - principal;
+
+  function formatRupees(amount) {
+    return "₹" + amount.toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+
+  result.innerHTML = `
+    <h3>📈 Your Investment Estimate</h3>
+    <p><strong>Initial Investment:</strong>
+      ${formatRupees(principal)}</p>
+    <p><strong>Estimated Interest Earned:</strong>
+      ${formatRupees(interestEarned)}</p>
+    <p><strong>Estimated Future Value:</strong>
+      ${formatRupees(futureValue)}</p>
+  `;
+}
+</script>
+  <!-- Animated Financial Explainer -->
+<section id="financial-explainer" style="
+  margin:20px 0;
+  padding:20px;
+  border-radius:14px;
+  background:#eef6ff;
+  color:#1d2939;
+  font-family:Arial,sans-serif;
+  text-align:center;
+">
+  <h2>🎬 How Savings Grow</h2>
+
+  <p>
+    Learn how regular saving and compound growth can increase
+    the value of an investment over time.
+  </p>
+
+  <div style="
+    max-width:500px;
+    margin:20px auto;
+    padding:20px;
+    background:white;
+    border-radius:12px;
+  ">
+    <div style="font-size:48px;" aria-hidden="true">🏦</div>
+
+    <div style="
+      height:24px;
+      width:100%;
+      background:#e5e7eb;
+      border-radius:20px;
+      overflow:hidden;
+      margin:20px 0;
+    ">
+      <div id="savingsGrowthBar" style="
+        height:100%;
+        width:5%;
+        background:#16803c;
+        border-radius:20px;
+        transition:width 1s ease;
+      "></div>
+    </div>
+
+    <h3 id="savingsYear">Year 0</h3>
+    <p id="savingsAmount" aria-live="polite">
+      Estimated savings: ₹1,000
+    </p>
+
+    <p id="savingsExplanation">
+      Start with an initial saving of ₹1,000.
+    </p>
+  </div>
+
+  <button type="button" id="startSavingsAnimation"
+    style="
+      padding:12px 18px;
+      border:0;
+      border-radius:8px;
+      background:#175cd3;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+    ">
+    ▶ Start Animation
+  </button>
+
+  <p style="font-size:13px;color:#475467;margin-top:15px;">
+    Illustration only. Assumes a hypothetical 8% annual growth rate.
+    Actual investment returns are not guaranteed.
+  </p>
+</section>
+
+<script>
+(function () {
+  const bar = document.getElementById("savingsGrowthBar");
+  const yearText = document.getElementById("savingsYear");
+  const amountText = document.getElementById("savingsAmount");
+  const explanationText = document.getElementById("savingsExplanation");
+  const startButton = document.getElementById("startSavingsAnimation");
+
+  if (!bar || !yearText || !amountText || !explanationText || !startButton) {
+    return;
+  }
+
+  let animationTimer = null;
+  const initialSavings = 1000;
+  const annualGrowth = 0.08;
+  const totalYears = 10;
+
+  function formatRupees(amount) {
+    return "₹" + amount.toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
+    });
+  }
+
+  function showYear(year) {
+    const amount = initialSavings * Math.pow(1 + annualGrowth, year);
+    const progress = (year / totalYears) * 100;
+
+    bar.style.width = Math.max(5, progress) + "%";
+    yearText.textContent = "Year " + year;
+    amountText.textContent = "Estimated savings: " + formatRupees(amount);
+
+    if (year === 0) {
+      explanationText.textContent =
+        "Start with an initial saving of ₹1,000.";
+    } else if (year < totalYears) {
+      explanationText.textContent =
+        "Growth accumulates over time. This example assumes 8% annual growth.";
+    } else {
+      explanationText.textContent =
+        "After 10 years, ₹1,000 would grow to an estimated " +
+        formatRupees(amount) + " at 8% annual growth.";
+    }
+  }
+
+  function startAnimation() {
+    if (animationTimer !== null) {
+      clearInterval(animationTimer);
+      animationTimer = null;
+    }
+
+    let year = 0;
+    showYear(year);
+    startButton.disabled = true;
+    startButton.textContent = "Animation Running…";
+
+    animationTimer = setInterval(function () {
+      year++;
+      showYear(year);
+
+      if (year >= totalYears) {
+        clearInterval(animationTimer);
+        animationTimer = null;
+        startButton.disabled = false;
+        startButton.textContent = "↻ Replay Animation";
+      }
+    }, 700);
+  }
+
+  startButton.addEventListener("click", startAnimation);
+  showYear(0);
+})();
+</script>
+  <!-- Financial Learning Progress Tracker -->
+<section id="learning-progress" style="
+  margin:20px 0;
+  padding:20px;
+  background:#f5f3ff;
+  border:1px solid #ddd6fe;
+  border-radius:14px;
+  color:#252044;
+  font-family:Arial,sans-serif;
+">
+  <h2>🏆 Financial Learning Journey</h2>
+  <p>Mark each topic as completed to track your learning progress.</p>
+
+  <div style="
+    height:22px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin:16px 0;
+  ">
+    <div id="learningProgressBar" role="progressbar"
+      aria-label="Learning progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      style="
+        height:100%;
+        width:0%;
+        background:#7c3aed;
+        transition:width .4s ease;
+      ">
+    </div>
+  </div>
+
+  <p id="learningProgressText" aria-live="polite">
+    0 of 5 topics completed (0%)
+  </p>
+
+  <div id="learningTopics" style="line-height:2.2;">
+    <label><input type="checkbox" data-topic="budgeting"> 💵 Budgeting Basics</label><br>
+    <label><input type="checkbox" data-topic="saving"> 🏦 Saving Money</label><br>
+    <label><input type="checkbox" data-topic="interest"> 📈 Compound Interest</label><br>
+    <label><input type="checkbox" data-topic="loans"> 🧾 Understanding Loans</label><br>
+    <label><input type="checkbox" data-topic="investing"> 🌱 Investment Basics</label>
+  </div>
+
+  <h3 style="margin-top:20px;">🎖️ Your Achievement Badges</h3>
+  <div id="learningBadges" style="
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:12px;
+  "></div>
+
+  <p style="font-size:13px;color:#555;margin-top:16px;">
+    Your progress is saved in this browser on this device.
+  </p>
+</section>
+
+<script>
+(function () {
+  const section = document.getElementById("learning-progress");
+  if (!section) return;
+
+  const checkboxes = section.querySelectorAll("[data-topic]");
+  const progressBar = document.getElementById("learningProgressBar");
+  const progressText = document.getElementById("learningProgressText");
+  const badgesContainer = document.getElementById("learningBadges");
+
+  const storageKey = "financialLearningProgress_v1";
+  const topics = Array.from(checkboxes);
+
+  const badges = [
+    { count: 1, title: "First Step", icon: "🌟" },
+    { count: 3, title: "Money Learner", icon: "📚" },
+    { count: 5, title: "Finance Explorer", icon: "🏆" }
+  ];
+
+  function saveProgress() {
+    try {
+      const completed = topics
+        .filter(box => box.checked)
+        .map(box => box.dataset.topic);
+
+      localStorage.setItem(storageKey, JSON.stringify(completed));
+    } catch (error) {
+      // Progress will still work if browser storage is unavailable.
+    }
+  }
+
+  function loadProgress() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+
+      if (Array.isArray(saved)) {
+        topics.forEach(box => {
+          box.checked = saved.includes(box.dataset.topic);
+        });
+      }
+    } catch (error) {
+      // Use the default unchecked state if saved data is unavailable.
+    }
+  }
+
+  function updateProgress() {
+    const completedCount = topics.filter(box => box.checked).length;
+    const total = topics.length;
+    const percent = total ? Math.round(completedCount / total * 100) : 0;
+
+    progressBar.style.width = percent + "%";
+    progressBar.setAttribute("aria-valuenow", String(percent));
+
+    progressText.textContent =
+      completedCount + " of " + total + " topics completed (" +
+      percent + "%)";
+
+    badgesContainer.replaceChildren();
+
+    badges.forEach(badge => {
+      const earned = completedCount >= badge.count;
+      const badgeElement = document.createElement("div");
+
+      badgeElement.textContent =
+        badge.icon + " " + badge.title +
+        (earned ? " — Earned!" : " — Locked");
+
+      badgeElement.style.cssText = `
+        padding:10px;
+        border-radius:8px;
+        background:${earned ? "#dcfce7" : "#e5e7eb"};
+        color:${earned ? "#166534" : "#555"};
+        border:1px solid ${earned ? "#86efac" : "#d1d5db"};
+      `;
+
+      badgesContainer.appendChild(badgeElement);
+    });
+
+    saveProgress();
+  }
+
+  loadProgress();
+  topics.forEach(box => box.addEventListener("change", updateProgress));
+  updateProgress();
+})();
+ </script>
+  <!-- Responsive Preview Controls -->
+<section id="responsive-preview-tools" style="
+  margin:20px 0;
+  padding:20px;
+  background:#f8fafc;
+  border:1px solid #cbd5e1;
+  border-radius:14px;
+  color:#1e293b;
+  font-family:Arial,sans-serif;
+">
+  <h2>📱 Responsive Preview</h2>
+  <p>Choose a screen size to preview a sample learning module.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin:16px 0;">
+    <button type="button" data-preview="mobile">📱 Mobile</button>
+    <button type="button" data-preview="tablet">📲 Tablet</button>
+    <button type="button" data-preview="desktop">💻 Desktop</button>
+  </div>
+
+  <div style="overflow-x:auto;padding:10px 0;">
+    <div id="responsivePreviewFrame" style="
+      width:100%;
+      max-width:100%;
+      min-height:220px;
+      margin:0 auto;
+      padding:16px;
+      background:white;
+      border:2px solid #64748b;
+      border-radius:12px;
+      box-sizing:border-box;
+      transition:width .3s ease;
+    ">
+      <h3>💰 Understanding Smart Saving</h3>
+      <p>Saving a small amount regularly can help you prepare for future expenses.</p>
+      <div style="padding:12px;background:#dcfce7;border-radius:8px;">
+        <strong>Tip:</strong> Set a realistic savings goal and track your progress.
+      </div>
+      <p style="margin-bottom:0;">Example: Save ₹500 each month toward a goal.</p>
+    </div>
+  </div>
+
+  <p id="responsivePreviewStatus" aria-live="polite">
+    Current preview: Mobile
+  </p>
+</section>
+
+<style>
+#responsive-preview-tools [data-preview] {
+  padding:10px 14px;
+  border:1px solid #94a3b8;
+  border-radius:8px;
+  background:#ffffff;
+  color:#1e293b;
+  cursor:pointer;
+  font-size:15px;
+}
+
+#responsive-preview-tools [data-preview]:focus-visible {
+  outline:3px solid #2563eb;
+  outline-offset:3px;
+}
+
+#responsive-preview-tools [data-preview][aria-pressed="true"] {
+  background:#dbeafe;
+  border-color:#2563eb;
+}
+</style>
+
+<script>
+(function () {
+  const section = document.getElementById("responsive-preview-tools");
+  if (!section) return;
+
+  const frame = document.getElementById("responsivePreviewFrame");
+  const status = document.getElementById("responsivePreviewStatus");
+  const buttons = section.querySelectorAll("[data-preview]");
+
+  const sizes = {
+    mobile: { width: "320px", label: "Mobile" },
+    tablet: { width: "600px", label: "Tablet" },
+    desktop: { width: "100%", label: "Desktop" }
+  };
+
+  function setPreview(device) {
+    const size = sizes[device];
+    if (!size) return;
+
+    frame.style.width = size.width;
+    frame.style.maxWidth = "100%";
+
+    buttons.forEach(button => {
+      const selected = button.dataset.preview === device;
+      button.setAttribute("aria-pressed", String(selected));
+    });
+
+    status.textContent = "Current preview: " + size.label;
+  }
+
+  buttons.forEach(button => {
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", function () {
+      setPreview(button.dataset.preview);
+    });
+  });
+
+  setPreview("mobile");
+})();
+</script>
+  <!-- Module Validation and Accessibility Checker -->
+<section id="module-validation" style="
+  margin:20px 0;
+  padding:20px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  border-radius:14px;
+  color:#292524;
+  font-family:Arial,sans-serif;
+">
+  <h2>✅ Module Quality Checker</h2>
+  <p>Check a learning module's basic structure before sharing it.</p>
+
+  <label for="qualityTitle">Module Title</label><br>
+  <input id="qualityTitle" type="text"
+    placeholder="Enter your module title"
+    style="width:100%;padding:10px;margin:8px 0 16px;box-sizing:border-box;">
+
+  <label for="qualityContent">Learning Content</label><br>
+  <textarea id="qualityContent" rows="5"
+    placeholder="Write your learning content here..."
+    style="width:100%;padding:10px;margin:8px 0 16px;box-sizing:border-box;"></textarea>
+
+  <label for="qualityQuestion">Quiz Question</label><br>
+  <input id="qualityQuestion" type="text"
+    placeholder="Enter a quiz question"
+    style="width:100%;padding:10px;margin:8px 0 16px;box-sizing:border-box;">
+
+  <button id="checkModuleQuality" type="button"
+    style="padding:12px 18px;background:#c2410c;color:white;
+    border:0;border-radius:8px;cursor:pointer;font-size:16px;">
+    Check Module
+  </button>
+
+  <div id="moduleQualityResults" aria-live="polite"
+    style="margin-top:18px;padding:14px;background:white;
+    border-radius:8px;line-height:1.8;">
+    Enter your details and select Check Module.
+  </div>
+</section>
+
+<script>
+(function () {
+  const button = document.getElementById("checkModuleQuality");
+  const results = document.getElementById("moduleQualityResults");
+
+  if (!button || !results) return;
+
+  button.addEventListener("click", function () {
+    const title = document.getElementById("qualityTitle").value.trim();
+    const content = document.getElementById("qualityContent").value.trim();
+    const question = document.getElementById("qualityQuestion").value.trim();
+
+    const checks = [
+      {
+        label: "Module title",
+        passed: title.length >= 3,
+        advice: "Add a title containing at least 3 characters."
+      },
+      {
+        label: "Learning content",
+        passed: content.length >= 30,
+        advice: "Add at least 30 characters of learning content."
+      },
+      {
+        label: "Quiz question",
+        passed: question.length >= 10,
+        advice: "Add a quiz question containing at least 10 characters."
+      }
+    ];
+
+    const passedCount = checks.filter(check => check.passed).length;
+    const failedChecks = checks.filter(check => !check.passed);
+
+    results.replaceChildren();
+
+    const heading = document.createElement("h3");
+    heading.textContent =
+      passedCount + " of " + checks.length + " checks passed";
+    results.appendChild(heading);
+
+    const list = document.createElement("ul");
+
+    checks.forEach(check => {
+      const item = document.createElement("li");
+      item.textContent =
+        (check.passed ? "✅ " + check.label : "⚠️ " + check.label) +
+        (check.passed ? " — Passed" : " — " + check.advice);
+      list.appendChild(item);
+    });
+
+    results.appendChild(list);
+
+    const summary = document.createElement("p");
+    summary.textContent = failedChecks.length === 0
+      ? "Great! All basic checks passed. Review your module manually before sharing."
+      : "Complete the suggestions above and check the module again.";
+
+    results.appendChild(summary);
+  });
+})();
+</script>
+  
+<footer>
+  © 2026 All-in-One Loan Application
+  <br>
+  Frontend Development Project | HTML • CSS • JavaScript
+</footer>
+  
+</body>
+</html>
+
